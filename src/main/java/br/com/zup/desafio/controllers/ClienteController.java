@@ -21,4 +21,9 @@ public class ClienteController {
         Cliente objCliente = clienteService.adicionarCliente(cliente);
         return objCliente;
     }
+
+    @GetMapping("{CPF}/")
+    public Cliente pesquisarClientePeloCPF(@PathVariable String CPF){
+        return clienteService.pesquisarClientePeloCPF(CPF);
+    }
 }
