@@ -11,12 +11,21 @@ public class ProdutoService {
     private List<Produto> produtos = new ArrayList<>();
 
     public Produto adicionarProduto(Produto produto){
-        produtos.add(produto);
-        return produto;
+            pesquisarProdutoPeloNome(produto.getNome());
+            produtos.add(produto);
+            return produto;
     }
 
     public List<Produto> pesquisarProdutos(){
         return produtos;
+    }
+
+    public void pesquisarProdutoPeloNome(String nome){
+        for(Produto produto : produtos){
+            if(produto.getNome().equalsIgnoreCase(nome)){
+                throw new RuntimeException("Produto já cadastrado");
+            }
+        }
     }
 
 }
