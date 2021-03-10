@@ -15,4 +15,8 @@ public class ProdutoService {
         return produto;
     }
 
+    public List<Produto> pesquisarProdutos(){
+        return produtos;
+    }
+
 }

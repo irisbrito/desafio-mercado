@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("produtos/")
@@ -20,5 +21,10 @@ public class ProdutoController {
     public Produto adicionarProduto(@RequestBody @Valid Produto produto){
         Produto objetoProduto = produtoService.adicionarProduto(produto);
         return objetoProduto;
+    }
+
+    @GetMapping
+    public List<Produto> mostrarProdutos(){
+        return produtoService.pesquisarProdutos();
     }
 }
