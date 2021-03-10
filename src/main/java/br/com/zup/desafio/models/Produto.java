@@ -9,11 +9,9 @@ public class Produto {
     @NotNull(message = "O nome do produto é um campo obrigatório")
     private String nome;
 
-    @NotEmpty(message = "O preço não pode ficar vazio")
     @NotNull(message = "Preço é um campo obrigatório")
     private Double preco;
 
-    @NotEmpty(message = "Quantidade não pode ficar vazio")
     @NotNull(message = "Quantidade é um campo obrigatório")
     private int quantidade;
 
