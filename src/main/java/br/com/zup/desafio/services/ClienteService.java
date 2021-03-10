@@ -11,6 +11,7 @@ public class ClienteService {
     private List<Cliente> clientes = new ArrayList<>();
 
     public Cliente adicionarCliente(Cliente cliente){
+        validarCadastro(cliente.getCPF(), cliente.getEmail());
         clientes.add(cliente);
         return cliente;
     }
@@ -24,4 +25,11 @@ public class ClienteService {
         throw new RuntimeException("Cliente não encontrado");
     }
 
+    public void validarCadastro(String CPF, String email){
+        for(Cliente cliente : clientes){
+            if(cliente.getCPF().equalsIgnoreCase(CPF) || cliente.getEmail().equalsIgnoreCase(email)){
+                throw new RuntimeException("Cliente já cadastrado");
+            }
+        }
+    }
 }
