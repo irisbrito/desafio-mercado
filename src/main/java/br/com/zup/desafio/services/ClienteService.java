@@ -11,7 +11,8 @@ public class ClienteService {
     private List<Cliente> clientes = new ArrayList<>();
 
     public Cliente adicionarCliente(Cliente cliente){
-        validarCadastro(cliente.getCPF(), cliente.getEmail());
+        validarCadastro(cliente.getCPF());
+        validarEmail(cliente.getEmail());
         clientes.add(cliente);
         return cliente;
     }
@@ -25,10 +26,18 @@ public class ClienteService {
         throw new RuntimeException("Cliente não encontrado");
     }
 
-    public void validarCadastro(String CPF, String email){
+    public void validarCadastro(String CPF){
         for(Cliente cliente : clientes){
-            if(cliente.getCPF().equalsIgnoreCase(CPF) || cliente.getEmail().equalsIgnoreCase(email)){
+            if(cliente.getCPF().equalsIgnoreCase(CPF)){
                 throw new RuntimeException("Cliente já cadastrado");
+            }
+        }
+    }
+
+    public void validarEmail(String email){
+        for(Cliente cliente : clientes) {
+            if (cliente.getEmail().equalsIgnoreCase(email)) {
+                throw new RuntimeException("Email já cadastrado");
             }
         }
     }
