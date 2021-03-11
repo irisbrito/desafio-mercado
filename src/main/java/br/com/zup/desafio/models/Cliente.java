@@ -13,7 +13,7 @@ public class Cliente {
     private String nome;
 
     @CPF(message = "CPF inválido")
-    private String CPF;
+    private String cpf;
 
     @Email(message = "Email inválido")
     private String email;
@@ -29,12 +29,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {

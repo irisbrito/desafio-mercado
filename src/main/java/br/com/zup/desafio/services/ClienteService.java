@@ -1,5 +1,8 @@
 package br.com.zup.desafio.services;
 
+import br.com.zup.desafio.exceptions.ClienteExistenteEmailException;
+import br.com.zup.desafio.exceptions.ClienteExistenteException;
+import br.com.zup.desafio.exceptions.ClienteNaoEncontradoException;
 import br.com.zup.desafio.models.Cliente;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +14,25 @@ public class ClienteService {
     private List<Cliente> clientes = new ArrayList<>();
 
     public Cliente adicionarCliente(Cliente cliente){
-        validarCadastro(cliente.getCPF());
+        validarCadastro(cliente.getCpf());
         validarEmail(cliente.getEmail());
         clientes.add(cliente);
         return cliente;
     }
 
-    public Cliente pesquisarClientePeloCPF(String CPF){
+    public Cliente pesquisarClientePeloCPF(String cpf){
         for(Cliente cliente : clientes){
-            if(cliente.getCPF().equalsIgnoreCase(CPF)){
+            if(cliente.getCpf().equalsIgnoreCase(cpf)){
                 return cliente;
             }
         }
-        throw new RuntimeException("Cliente não encontrado");
+        throw new ClienteNaoEncontradoException();
     }
 
-    public void validarCadastro(String CPF){
+    public void validarCadastro(String cpf){
         for(Cliente cliente : clientes){
-            if(cliente.getCPF().equalsIgnoreCase(CPF)){
-                throw new RuntimeException("Cliente já cadastrado");
+            if(cliente.getCpf().equalsIgnoreCase(cpf)){
+                throw new ClienteExistenteException();
             }
         }
     }
@@ -37,7 +40,7 @@ public class ClienteService {
     public void validarEmail(String email){
         for(Cliente cliente : clientes) {
             if (cliente.getEmail().equalsIgnoreCase(email)) {
-                throw new RuntimeException("Email já cadastrado");
+                throw new ClienteExistenteEmailException();
             }
         }
     }
