@@ -1,5 +1,6 @@
 package br.com.zup.desafio.services;
 
+import br.com.zup.desafio.exceptions.ProdutoExistenteException;
 import br.com.zup.desafio.models.Produto;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ProdutoService {
     public void pesquisarProdutoPeloNome(String nome){
         for(Produto produto : produtos){
             if(produto.getNome().equalsIgnoreCase(nome)){
-                throw new RuntimeException("Produto já cadastrado");
+                throw new ProdutoExistenteException();
             }
         }
     }
