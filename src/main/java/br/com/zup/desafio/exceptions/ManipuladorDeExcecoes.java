@@ -75,6 +75,25 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         return respostaDeErro;
     }
 
+    @ExceptionHandler({ProdutoNaoEncontradoException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RespostaDeErro manipularProdutoNaoEncontrado(ExcecaoBasica erro){
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(erro.getMessage(), erro.getCampo());
+        RespostaDeErro respostaDeErro = new RespostaDeErro(erro.getTipoDoErro(), erro.getStatus(), erro.getRazaoDoErro(),
+                Arrays.asList(objetoDeErro));
+
+        return respostaDeErro;
+    }
+
+    @ExceptionHandler({ProdutoExistenteException.class})
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public RespostaDeErro manipularProdutoExistente(ExcecaoBasica erro){
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(erro.getMessage(), erro.getCampo());
+        RespostaDeErro respostaDeErro = new RespostaDeErro(erro.getTipoDoErro(), erro.getStatus(), erro.getRazaoDoErro(),
+                Arrays.asList(objetoDeErro));
+
+        return respostaDeErro;
+    }
 
 
 }
