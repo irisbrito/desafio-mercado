@@ -32,4 +32,11 @@ public class CompraController {
        return compraService.realizarCompra(compraDTO.converterCompraDTO(cliente, produtos));
     }
 
+    @GetMapping
+    public List<Compra> listarCompras(){
+        return compraService.listarCompras();
+    }
+
+
+
 }
