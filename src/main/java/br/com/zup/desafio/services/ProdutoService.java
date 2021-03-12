@@ -3,6 +3,7 @@ package br.com.zup.desafio.services;
 import br.com.zup.desafio.DTOs.ProdutoDTO;
 import br.com.zup.desafio.exceptions.ProdutoExistenteException;
 import br.com.zup.desafio.exceptions.ProdutoNaoEncontradoException;
+import br.com.zup.desafio.exceptions.QuantidadeInvalidaException;
 import br.com.zup.desafio.models.Produto;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class ProdutoService {
 
         for (Produto produtoDTO : produtoDTOs) {
             for (Produto produto : this.produtos) {
-                if (produto.getNome().equalsIgnoreCase(produtoDTO.getNome())){
+                if (produto.getNome().equalsIgnoreCase(produtoDTO.getNome()) && validarQuantidade(produto)){
                     produtosDaCompra.add(produto);
                     return produtosDaCompra;
                 }
@@ -45,5 +46,14 @@ public class ProdutoService {
         }
 
         throw new ProdutoNaoEncontradoException();
+    }
+
+    public boolean validarQuantidade(Produto produto){
+
+        if(produto.getQuantidade() > 0){
+            return true;
+        }
+
+        throw new QuantidadeInvalidaException("O produto " + produto.getNome() + " está indisponível");
     }
 }
