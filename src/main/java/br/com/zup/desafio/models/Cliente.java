@@ -21,6 +21,10 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(@CPF(message = "CPF inválido") String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
