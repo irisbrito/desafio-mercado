@@ -31,4 +31,5 @@ public class CompraController {
         List<Produto> produtos = produtoService.adicionarProdutosNaCompra(compraDTO.getProdutos());
        return compraService.realizarCompra(compraDTO.converterCompraDTO(cliente, produtos));
     }
+
 }
