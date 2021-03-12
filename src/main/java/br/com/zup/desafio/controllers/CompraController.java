@@ -37,6 +37,9 @@ public class CompraController {
         return compraService.listarCompras();
     }
 
-
+    @GetMapping("{cpf}/")
+    public List <Compra> pesquisarCompraPeloCpf(@PathVariable String cpf){
+        return compraService.pesquisarCompraPeloCpf(cpf);
+    }
 
 }

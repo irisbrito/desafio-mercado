@@ -21,5 +21,16 @@ public class CompraService {
         return compras;
     }
 
+    public List<Compra> pesquisarCompraPeloCpf(String cpf){
+        List<Compra> comprasDoCliente = new ArrayList<>();
+
+        for(Compra compra : compras){
+            if(compra.getCliente().getCpf().equals(cpf)){
+                comprasDoCliente.add(compra);
+                return comprasDoCliente;
+            }
+        }
+        throw new RuntimeException();
+    }
 
 }
