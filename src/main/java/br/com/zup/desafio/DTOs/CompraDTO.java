@@ -3,15 +3,19 @@ package br.com.zup.desafio.DTOs;
 import br.com.zup.desafio.models.Cliente;
 import br.com.zup.desafio.models.Compra;
 import br.com.zup.desafio.models.Produto;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class CompraDTO {
+    @CPF
     private String cpf;
-    private List<Produto> produtos;
+    @NotNull
+    private List<ProdutoDTO> produtos;
 
 
-    public CompraDTO(String cpf, List<Produto> produtos) {
+    public CompraDTO(@CPF String cpf, @NotNull List<ProdutoDTO> produtos) {
         this.cpf = cpf;
         this.produtos = produtos;
     }
@@ -27,11 +31,11 @@ public class CompraDTO {
         this.cpf = cpf;
     }
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoDTO> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<ProdutoDTO> produtos) {
         this.produtos = produtos;
     }
 

@@ -18,11 +18,11 @@ import java.util.List;
 public class CompraController {
 
     @Autowired
-    ClienteService clienteService;
+    private ClienteService clienteService;
     @Autowired
-    ProdutoService produtoService;
+    private ProdutoService produtoService;
     @Autowired
-    CompraService compraService;
+    private CompraService compraService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

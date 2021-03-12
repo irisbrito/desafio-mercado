@@ -1,5 +1,6 @@
 package br.com.zup.desafio.services;
 
+import br.com.zup.desafio.DTOs.ProdutoDTO;
 import br.com.zup.desafio.exceptions.ProdutoExistenteException;
 import br.com.zup.desafio.exceptions.ProdutoNaoEncontradoException;
 import br.com.zup.desafio.exceptions.QuantidadeInvalidaException;
@@ -52,20 +53,21 @@ public class ProdutoService {
      * @param produtoDTOs
      * @return os produtos comprados
      */
-    public List<Produto> adicionarProdutosNaCompra(List<Produto> produtoDTOs) {
+    public List<Produto> adicionarProdutosNaCompra(List<ProdutoDTO> produtoDTOs) {
 
         List<Produto> produtosDaCompra = new ArrayList<>();
 
-        for (Produto produtoDTO : produtoDTOs) {
+        for (ProdutoDTO produtoDTO : produtoDTOs) {
             for (Produto produto : this.produtos) {
-                if (produto.getNome().equalsIgnoreCase(produtoDTO.getNome()) && validarQuantidade(produto)){
+                if (produto.getNome().equalsIgnoreCase(produtoDTO.getNome())){
+                    validarQuantidade(produto);
                     produtosDaCompra.add(produto);
-                    return produtosDaCompra;
+
                 }
             }
-        }
 
-        throw new ProdutoNaoEncontradoException();
+        }
+        return produtosDaCompra;
     }
 
     /**
@@ -79,6 +81,8 @@ public class ProdutoService {
             return true;
         }
 
-        throw new QuantidadeInvalidaException("O produto " + produto + " está indisponível");
+        throw new QuantidadeInvalidaException("O produto " + produto.getNome() + " está indisponível");
     }
+
+
 }
